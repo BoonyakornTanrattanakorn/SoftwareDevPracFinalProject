@@ -65,7 +65,7 @@ exports.getReservation = async (req, res, next) => {
       });
     }
 
-    if (reservation.user.toString() !== req.user.id) {
+    if (req.user.role !== "admin" && reservation.user.toString() !== req.user.id) {
       // Don't allow a user to read other user reservations
       return res.status(401).json({
         success: false,
