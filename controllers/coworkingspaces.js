@@ -13,7 +13,7 @@ exports.getCoworkingSpaces = async (req, res, next) => {
     // Fields to exclude
     const removeFields = ["select", "sort", "page", "limit"];
     removeFields.forEach((param) => delete reqQuery[param]);
-    console.log(reqQuery);
+    // console.log(reqQuery);
 
     let queryStr = JSON.stringify(reqQuery);
     queryStr = queryStr.replace(
@@ -31,8 +31,6 @@ exports.getCoworkingSpaces = async (req, res, next) => {
     if (req.query.sort) {
       const sortBy = req.query.sort.split(",").join(" ");
       query = query.sort(sortBy);
-    } else {
-      query = query.sort("-createdAt");
     }
     // Pagination
     const page = parseInt(req.query.page, 10) || 1;
@@ -61,8 +59,10 @@ exports.getCoworkingSpaces = async (req, res, next) => {
       pagination,
     });
   } catch (err) {
+    let message = err.message;
     res.status(400).json({
       success: false,
+      message,
     });
   }
 };
@@ -75,7 +75,7 @@ exports.getCoworkingSpace = async (req, res, next) => {
     const coworkingSpace = await CoworkingSpace.findById(req.params.id);
 
     if (!coworkingSpace) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
       });
     }
@@ -85,8 +85,10 @@ exports.getCoworkingSpace = async (req, res, next) => {
       data: coworkingSpace,
     });
   } catch (err) {
+    let message = err.message;
     res.status(400).json({
       success: false,
+      message,
     });
   }
 };
@@ -125,7 +127,7 @@ exports.updateCoworkingSpace = async (req, res, next) => {
     );
 
     if (!coworkingSpace) {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
       });
     }
@@ -135,8 +137,10 @@ exports.updateCoworkingSpace = async (req, res, next) => {
       data: coworkingSpace,
     });
   } catch (err) {
+    let message = err.message;
     res.status(400).json({
       success: false,
+      message,
     });
   }
 };
@@ -161,8 +165,10 @@ exports.deleteCoworkingSpace = async (req, res, next) => {
       data: coworkingSpace,
     });
   } catch (err) {
+    let message = err.message;
     res.status(400).json({
       success: false,
+      message,
     });
   }
 };

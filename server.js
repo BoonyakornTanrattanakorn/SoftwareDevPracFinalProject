@@ -8,8 +8,8 @@ const connectDB = require("./config/db");
 dotenv.config({ path: "./config/config.env" });
 
 // routes
-// const coworkingspaces = require("./routes/coworkingspaces");
-// const reservations = require("./routes/reservations");
+const coworkingspaces = require("./routes/coworkingspaces");
+const reservations = require("./routes/reservations");
 const auth = require("./routes/auth");
 
 // Connect DB
@@ -35,8 +35,8 @@ app.use((err, req, res, next) => {
 app.use(cookieParser());
 
 // Mount routers
-// app.use("/api/v1/coworkingspaces", coworkingspaces);
-// app.use("/api/v1/reservations", reservations);
+app.use("/api/v1/coworkingspaces", coworkingspaces);
+app.use("/api/v1/reservations", reservations);
 app.use("/api/v1/auth", auth);
 
 const PORT = process.env.PORT || 5000;

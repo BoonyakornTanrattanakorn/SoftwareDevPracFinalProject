@@ -46,7 +46,7 @@ exports.login = async (req, res, next) => {
 
     if (!user) {
       return res
-        .status(400)
+        .status(401)
         .json({ success: false, message: "Invalid credentials" });
     }
 
@@ -99,7 +99,7 @@ const sendTokenResponse = (user, statusCode, res) => {
 };
 
 // @desc    Get current Logged in user
-// @route   POST /api/v1/auth/me
+// @route   GET /api/v1/auth/me
 // @access  Private
 exports.getMe = async (req, res, next) => {
   const user = await User.findById(req.user.id);
@@ -110,7 +110,7 @@ exports.getMe = async (req, res, next) => {
 };
 
 // @desc    Log user out / clear cookie
-// @route   POST /api/v1/auth/logout
+// @route   GET /api/v1/auth/logout
 // @access  Private
 exports.logout = async (req, res, next) => {
   res.cookie("token", "none", {

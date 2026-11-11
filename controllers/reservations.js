@@ -1,5 +1,5 @@
 const Reservation = require("../models/Reservation");
-const coworkingSpace = require("../models/coworkingSpace");
+const CoworkingSpace = require("../models/CoworkingSpace");
 
 const MAX_RESERVATIONS = 3;
 
@@ -11,14 +11,6 @@ exports.getReservations = async (req, res, next) => {
 
   if (req.user.role !== "admin") {
     // General users can see only their reservations
-    if (reservation.user.toString() !== req.user.id) {
-      // Don't allow a user to read other user reservations
-      return res.status(403).json({
-        success: false,
-        message: `User ${req.user.id} is not authorized to view this reservation`,
-      });
-    }
-
     query = Reservation.find({ user: req.user.id }).populate({
       path: "coworkingSpace",
       select: "name address tel openTime closeTime",
@@ -56,7 +48,7 @@ exports.getReservations = async (req, res, next) => {
   }
 };
 
-// @desc    Get an reservation
+// @desc    Get a reservation
 //@route    GET /api/v1/reservations/:id
 //@access   Public
 exports.getReservation = async (req, res, next) => {
@@ -73,6 +65,14 @@ exports.getReservation = async (req, res, next) => {
       });
     }
 
+    if (reservation.user.toString() !== req.user.id) {
+      // Don't allow a user to read other user reservations
+      return res.status(401).json({
+        success: false,
+        message: `User ${req.user.id} is not authorized to view this reservation`,
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: reservation,
@@ -86,13 +86,11 @@ exports.getReservation = async (req, res, next) => {
 };
 
 // @desc    Add an reservation
-//@route    POST /api/v1/coworkingSpaces/:coworkingSpaceId/reservation
+//@route    POST /api/v1/coworkingSpaces/:coworkingSpaceId/reservations
 //@access   Private
 exports.addReservation = async (req, res, next) => {
   try {
-    req.body.coworkingSpace = req.params.coworkingSpaceId;
-
-    const coworkingSpace = await coworkingSpace.findById(
+    const coworkingSpace = await CoworkingSpace.findById(
       req.params.coworkingSpaceId,
     );
 
@@ -103,18 +101,12 @@ exports.addReservation = async (req, res, next) => {
       });
     }
 
-    // add user Id to req.body
-    req.body.user = req.user.id;
-
     // date is required
     if (!req.body.reservationDate) {
       return res
         .status(400)
         .json({ success: false, message: "Please provide a reservationDate" });
     }
-
-    // Check for existed reservation
-    const existedReservations = await Reservation.find({ user: req.user.id });
 
     // If the user is not an admin, then have reservations count limit.
     const count = await Reservation.countDocuments({ user: req.user.id });

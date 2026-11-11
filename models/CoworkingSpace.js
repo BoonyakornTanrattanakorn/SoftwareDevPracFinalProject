@@ -36,4 +36,4 @@ CoworkingSpaceSchema.virtual("reservations", {
   justOne: false,
 });
 
-module.exports = mongoose.model("Hospital", HospitalSchema);
+module.exports = mongoose.model("CoworkingSpace", CoworkingSpaceSchema);
