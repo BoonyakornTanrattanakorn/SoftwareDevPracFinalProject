@@ -8,36 +8,36 @@ const connectDB = require("./config/db");
 dotenv.config({ path: "./config/config.env" });
 
 // routes
-const coworkingspaces = require("./routes/coworkingspaces");
-const reservations = require("./routes/reservations");
+// const coworkingspaces = require("./routes/coworkingspaces");
+// const reservations = require("./routes/reservations");
 const auth = require("./routes/auth");
 
 // Connect DB
 connectDB();
 
 const app = express();
-// // Enable CORS
-// app.use(cors());
-// // Query Parser
-// app.set("query parser", "extended");
-// // Body parser
-// app.use(express.json());
-// // Handle invalid JSON body format
-// app.use((err, req, res, next) => {
-//   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-//     return res
-//       .status(400)
-//       .json({ success: false, message: "Invalid JSON payload" });
-//   }
-//   next(err);
-// });
-// // Cookie parser
-// app.use(cookieParser());
+// Enable CORS
+app.use(cors());
+// Query Parser
+app.set("query parser", "extended");
+// Body parser
+app.use(express.json());
+// Handle invalid JSON body format
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid JSON payload" });
+  }
+  next(err);
+});
+// Cookie parser
+app.use(cookieParser());
 
-// // Mount routers
+// Mount routers
 // app.use("/api/v1/coworkingspaces", coworkingspaces);
 // app.use("/api/v1/reservations", reservations);
-// app.use("/api/v1/auth", auth);
+app.use("/api/v1/auth", auth);
 
 const PORT = process.env.PORT || 5000;
 
