@@ -109,6 +109,42 @@ exports.getMe = async (req, res, next) => {
   });
 };
 
+// @desc    Update current logged in user's profile (name, tel, email)
+// @route   PUT /api/v1/auth/me
+// @access  Private
+exports.updateMe = async (req, res, next) => {
+  try {
+    // Only these fields can be changed here (role and password cannot)
+    const allowedFields = ["name", "tel", "email"];
+    const body = req.body || {};
+    const updates = {};
+    allowedFields.forEach((field) => {
+      if (body[field] !== undefined) updates[field] = body[field];
+    });
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide name, tel or email to update",
+      });
+    }
+
+    const user = await User.findById(req.user.id);
+    Object.assign(user, updates);
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (err) {
+    let message = err.message;
+    if (err.code === 11000) message = "Email is already registered";
+    res.status(400).json({ success: false, message });
+    console.log(err.stack);
+  }
+};
+
 // @desc    Log user out / clear cookie
 // @route   GET /api/v1/auth/logout
 // @access  Private
