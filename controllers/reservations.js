@@ -1,7 +1,14 @@
 const Reservation = require("../models/Reservation");
 const CoworkingSpace = require("../models/CoworkingSpace");
 
-const MAX_RESERVATIONS = 3;
+const Setting = require("../models/Setting");
+
+// Start of today (00:00 server time), reservations from this point on are "active"
+const startOfToday = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return today;
+};
 
 // @desc    Get all reservations
 //@route    GET /api/v1/reservations
@@ -108,12 +115,31 @@ exports.addReservation = async (req, res, next) => {
         .json({ success: false, message: "Please provide a reservationDate" });
     }
 
-    // If the user is not an admin, then have reservations count limit.
-    const count = await Reservation.countDocuments({ user: req.user.id });
-    if (count >= MAX_RESERVATIONS && req.user.role !== "admin") {
+    // Reservation date must be a valid date and not in the past
+    const reservationDate = new Date(req.body.reservationDate);
+    if (isNaN(reservationDate)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Date string is invalid" });
+    }
+    if (reservationDate < startOfToday()) {
       return res.status(400).json({
         success: false,
-        message: `The user with ID ${req.user.id} has already made ${MAX_RESERVATIONS} reservations`,
+        message: "Reservation date cannot be in the past",
+      });
+    }
+
+    // If the user is not an admin, limit the number of active reservations
+    // (the limit is configured by the admin in the settings)
+    const { maxReservations } = await Setting.getSettings();
+    const count = await Reservation.countDocuments({
+      user: req.user.id,
+      reservationDate: { $gte: startOfToday() },
+    });
+    if (count >= maxReservations && req.user.role !== "admin") {
+      return res.status(400).json({
+        success: false,
+        message: `The user with ID ${req.user.id} has already made ${maxReservations} active reservations`,
       });
     }
 
@@ -166,8 +192,22 @@ exports.updateReservation = async (req, res, next) => {
     }
 
     const updates = {};
-    if (req.body.reservationDate)
+    if (req.body.reservationDate) {
+      // New date must be a valid date and not in the past
+      const reservationDate = new Date(req.body.reservationDate);
+      if (isNaN(reservationDate)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Date string is invalid" });
+      }
+      if (reservationDate < startOfToday()) {
+        return res.status(400).json({
+          success: false,
+          message: "Reservation date cannot be in the past",
+        });
+      }
       updates.reservationDate = req.body.reservationDate;
+    }
     if (req.body.coworkingSpace) {
       const space = await CoworkingSpace.findById(req.body.coworkingSpace);
       if (!space)

@@ -11,6 +11,7 @@ dotenv.config({ path: "./config/config.env" });
 const coworkingspaces = require("./routes/coworkingspaces");
 const reservations = require("./routes/reservations");
 const auth = require("./routes/auth");
+const settings = require("./routes/settings");
 
 // Connect DB
 connectDB();
@@ -38,6 +39,7 @@ app.use(cookieParser());
 app.use("/api/v1/coworkingspaces", coworkingspaces);
 app.use("/api/v1/reservations", reservations);
 app.use("/api/v1/auth", auth);
+app.use("/api/v1/settings", settings);
 
 const PORT = process.env.PORT || 5000;
 
