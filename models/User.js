@@ -35,6 +35,12 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  favourites: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "CoworkingSpace",
+    },
+  ],
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {

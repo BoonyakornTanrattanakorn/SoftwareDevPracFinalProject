@@ -2636,6 +2636,458 @@
       ]
     },
     {
+      "name": "AR3 User Favourite List",
+      "item": [
+        {
+          "name": "View favourites - empty at first",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"list is empty\", () => pm.expect(pm.response.json().count).to.eql(0));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add favourite - no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add favourite - space not found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/000000000000000000000000",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "000000000000000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add favourite - invalid id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/abc",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "abc"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Space 1 to favourites",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"Space 1 is in the list\", () => pm.expect(pm.response.json().data).to.include(pm.collectionVariables.get(\"spaceId\")));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Space 2 to favourites",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"list has 2 spaces\", () => pm.expect(pm.response.json().count).to.eql(2));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId2}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId2}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Space 1 again (already in list)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                  "pm.test(\"says already in list\", () => pm.expect(pm.response.json().message).to.include(\"already\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View favourite list",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "const json = pm.response.json();",
+                  "pm.test(\"count is 2\", () => pm.expect(json.count).to.eql(2));",
+                  "pm.test(\"space details are shown\", () => {",
+                  "  json.data.forEach((s) => pm.expect(s).to.include.keys(\"name\", \"address\", \"tel\", \"openTime\", \"closeTime\"));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Space 1 from favourites",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "const json = pm.response.json();",
+                  "pm.test(\"count is 1\", () => pm.expect(json.count).to.eql(1));",
+                  "pm.test(\"Space 1 is removed\", () => pm.expect(json.data).to.not.include(pm.collectionVariables.get(\"spaceId\")));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Space 1 again (not in list)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites/{{spaceId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites",
+                "{{spaceId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "View favourite list after removal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "const json = pm.response.json();",
+                  "pm.test(\"only Space 2 is left\", () => {",
+                  "  pm.expect(json.count).to.eql(1);",
+                  "  pm.expect(json.data[0]._id).to.eql(pm.collectionVariables.get(\"spaceId2\"));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/favourites",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favourites"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "99 Cleanup",
       "item": [
         {
@@ -2711,6 +3163,47 @@
               "path": [
                 "coworkingspaces",
                 "{{spaceId2}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User favourites are cleared after spaces are deleted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"deleted spaces are removed from favourites\", () => pm.expect(pm.response.json().data.favourites).to.eql([]));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/me",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "me"
               ]
             }
           },

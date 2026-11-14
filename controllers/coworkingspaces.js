@@ -1,5 +1,6 @@
 const CoworkingSpace = require("../models/CoworkingSpace.js");
 const Reservation = require("../models/Reservation.js");
+const User = require("../models/User.js");
 
 //@desc     Get all coworkingSpaces
 //@route    GET /api/v1/coworkingSpaces
@@ -158,6 +159,11 @@ exports.deleteCoworkingSpace = async (req, res, next) => {
       });
     }
     await Reservation.deleteMany({ coworkingSpace: req.params.id });
+    // Remove the deleted space from every user's favourite list
+    await User.updateMany(
+      { favourites: req.params.id },
+      { $pull: { favourites: req.params.id } },
+    );
     await CoworkingSpace.deleteOne({ _id: req.params.id });
 
     res.status(200).json({
