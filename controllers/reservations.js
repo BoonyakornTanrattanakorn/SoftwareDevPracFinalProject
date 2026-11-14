@@ -4,6 +4,7 @@ const CoworkingSpace = require("../models/CoworkingSpace");
 const Setting = require("../models/Setting");
 const { findThaiPublicHoliday } = require("../utils/holidays");
 const { sendReservationConfirmation } = require("../utils/email");
+const { toCsv } = require("../utils/csv");
 
 // Start of today (00:00 server time), reservations from this point on are "active"
 const startOfToday = () => {
@@ -317,5 +318,102 @@ exports.deleteReservation = async (req, res, next) => {
     return res
       .status(500)
       .json({ success: false, message: "Cannot delete Reservation" });
+  }
+};
+
+
+// @desc    Export reservations within a date range as a CSV file
+//@route    GET /api/v1/reservations/export?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
+//@access   Private (admin)
+exports.exportReservations = async (req, res, next) => {
+  try {
+    const { startDate, endDate } = req.query;
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!startDate || !endDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide startDate and endDate (YYYY-MM-DD)",
+      });
+    }
+
+    // Reservation date as YYYY-MM-DD in Thailand time
+    const thaiDate = (date) =>
+      new Date(date.getTime() + 7 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
+    // The range covers whole days in Thailand time (UTC+7), both ends included
+    const start = new Date(`${startDate}T00:00:00.000+07:00`);
+    const end = new Date(`${endDate}T23:59:59.999+07:00`);
+    if (
+      !datePattern.test(startDate) ||
+      !datePattern.test(endDate) ||
+      isNaN(start) ||
+      isNaN(end) ||
+      thaiDate(start) !== startDate || // e.g. 2027-02-30 is not a real date
+      thaiDate(end) !== endDate
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "startDate and endDate must be valid dates in YYYY-MM-DD format",
+      });
+    }
+    if (start > end) {
+      return res.status(400).json({
+        success: false,
+        message: "startDate must be on or before endDate",
+      });
+    }
+
+    const filter = { reservationDate: { $gte: start, $lte: end } };
+    // /api/v1/coworkingspaces/:coworkingSpaceId/reservations/export only exports that space
+    if (req.params.coworkingSpaceId) {
+      filter.coworkingSpace = req.params.coworkingSpaceId;
+    }
+
+    const reservations = await Reservation.find(filter)
+      .populate({ path: "user", select: "name email tel" })
+      .populate({
+        path: "coworkingSpace",
+        select: "name address tel openTime closeTime",
+      })
+      .sort("reservationDate");
+
+    const header = [
+      "reservationId",
+      "reservationDate",
+      "userName",
+      "userEmail",
+      "userTel",
+      "coworkingSpaceName",
+      "coworkingSpaceAddress",
+      "coworkingSpaceTel",
+      "openTime",
+      "closeTime",
+      "createdAt",
+    ];
+    const rows = reservations.map((r) => [
+      r._id,
+      thaiDate(r.reservationDate),
+      r.user ? r.user.name : "",
+      r.user ? r.user.email : "",
+      r.user ? r.user.tel : "",
+      r.coworkingSpace ? r.coworkingSpace.name : "",
+      r.coworkingSpace ? r.coworkingSpace.address : "",
+      r.coworkingSpace ? r.coworkingSpace.tel : "",
+      r.coworkingSpace ? r.coworkingSpace.openTime : "",
+      r.coworkingSpace ? r.coworkingSpace.closeTime : "",
+      r.createdAt ? r.createdAt.toISOString() : "",
+    ]);
+
+    res
+      .status(200)
+      .set("Content-Type", "text/csv; charset=utf-8")
+      .attachment(`reservations_${startDate}_to_${endDate}.csv`)
+      .send(toCsv(header, rows));
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Cannot export reservations" });
   }
 };

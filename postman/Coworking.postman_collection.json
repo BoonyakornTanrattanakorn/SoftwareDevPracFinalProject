@@ -3637,6 +3637,379 @@
       ]
     },
     {
+      "name": "AR6 Admin Export Reservations As CSV",
+      "item": [
+        {
+          "name": "User cannot export",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                  "pm.test(\"blocked because of role\", () => pm.expect(pm.response.json().message).to.include(\"role user\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2027-04-01&endDate=2027-04-30",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2027-04-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-04-30"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export - missing dates",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export - invalid date (2027-02-30)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2027-02-30&endDate=2027-03-31",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2027-02-30"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-03-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export - start after end",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2027-05-01&endDate=2027-04-01",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2027-05-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-04-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export April 2027 as CSV",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"is a CSV file\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/csv\"));",
+                  "pm.test(\"is downloaded as an attachment\", () => pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.include(\"attachment\"));",
+                  "const lines = pm.response.text().replace(/^\\uFEFF/, \"\").trim().split(\"\\r\\n\");",
+                  "pm.test(\"has the header row\", () => pm.expect(lines[0]).to.eql(\"reservationId,reservationDate,userName,userEmail,userTel,coworkingSpaceName,coworkingSpaceAddress,coworkingSpaceTel,openTime,closeTime,createdAt\"));",
+                  "const rows = lines.slice(1);",
+                  "pm.test(\"has the user's 2 reservations in April\", () => {",
+                  "  const mine = rows.filter((r) => r.includes(pm.collectionVariables.get(\"userEmail\")));",
+                  "  pm.expect(mine.length).to.be.at.least(2);",
+                  "});",
+                  "pm.test(\"every row is inside the date range\", () => {",
+                  "  rows.forEach((r) => {",
+                  "    const date = r.split(\",\")[1];",
+                  "    pm.expect(date >= \"2027-04-01\" && date <= \"2027-04-30\", date).to.be.true;",
+                  "  });",
+                  "});",
+                  "pm.test(\"file name has the date range\", () => pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.include(\"reservations_2027-04-01_to_2027-04-30.csv\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2027-04-01&endDate=2027-04-30",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2027-04-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-04-30"
+                }
+              ]
+            },
+            "description": "In Postman, use **Send and Download** (arrow next to Send) to save the CSV file."
+          },
+          "response": []
+        },
+        {
+          "name": "Export one day (2027-05-11) includes the demo user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"is a CSV file\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/csv\"));",
+                  "pm.test(\"is downloaded as an attachment\", () => pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.include(\"attachment\"));",
+                  "const lines = pm.response.text().replace(/^\\uFEFF/, \"\").trim().split(\"\\r\\n\");",
+                  "pm.test(\"has the header row\", () => pm.expect(lines[0]).to.eql(\"reservationId,reservationDate,userName,userEmail,userTel,coworkingSpaceName,coworkingSpaceAddress,coworkingSpaceTel,openTime,closeTime,createdAt\"));",
+                  "const rows = lines.slice(1);",
+                  "pm.test(\"has the demo user's reservation\", () => pm.expect(rows.some((r) => r.includes(pm.collectionVariables.get(\"demoUserEmail\")))).to.be.true);",
+                  "pm.test(\"every row is on 2027-05-11\", () => rows.forEach((r) => pm.expect(r.split(\",\")[1]).to.eql(\"2027-05-11\")));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2027-05-11&endDate=2027-05-11",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2027-05-11"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2027-05-11"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Export a range with no reservations",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"is a CSV file\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"text/csv\"));",
+                  "pm.test(\"is downloaded as an attachment\", () => pm.expect(pm.response.headers.get(\"Content-Disposition\")).to.include(\"attachment\"));",
+                  "const lines = pm.response.text().replace(/^\\uFEFF/, \"\").trim().split(\"\\r\\n\");",
+                  "pm.test(\"has the header row\", () => pm.expect(lines[0]).to.eql(\"reservationId,reservationDate,userName,userEmail,userTel,coworkingSpaceName,coworkingSpaceAddress,coworkingSpaceTel,openTime,closeTime,createdAt\"));",
+                  "const rows = lines.slice(1);",
+                  "pm.test(\"only the header row\", () => pm.expect(rows.length).to.eql(0));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/export?startDate=2030-01-01&endDate=2030-01-31",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "export"
+              ],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2030-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2030-01-31"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "99 Cleanup",
       "item": [
         {
