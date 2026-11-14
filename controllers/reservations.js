@@ -3,6 +3,7 @@ const CoworkingSpace = require("../models/CoworkingSpace");
 
 const Setting = require("../models/Setting");
 const { findThaiPublicHoliday } = require("../utils/holidays");
+const { sendReservationConfirmation } = require("../utils/email");
 
 // Start of today (00:00 server time), reservations from this point on are "active"
 const startOfToday = () => {
@@ -180,6 +181,14 @@ exports.addReservation = async (req, res, next) => {
       coworkingSpace: req.params.coworkingSpaceId,
       user: req.user.id,
     });
+
+    // Send the confirmation email through Resend
+    // (not awaited, so the response is not delayed; a failed email is only logged)
+    sendReservationConfirmation(req.user, reservation, coworkingSpace)
+      .then(() => console.log(`Confirmation email sent to ${req.user.email}`))
+      .catch((err) =>
+        console.log(`Cannot send confirmation email: ${err.message}`),
+      );
 
     res.status(201).json({
       success: true,

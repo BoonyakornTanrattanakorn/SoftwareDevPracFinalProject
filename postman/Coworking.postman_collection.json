@@ -3465,6 +3465,178 @@
       ]
     },
     {
+      "name": "AR5 Reservation Confirmation Email",
+      "item": [
+        {
+          "name": "Register demo user with demoInbox (first run only)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Set demoInbox to the email you signed up to Resend with, e.g. --env-var \"demoInbox=you@gmail.com\"",
+                  "const inbox = pm.variables.get(\"demoInbox\");",
+                  "pm.collectionVariables.set(\"demoUserEmail\", inbox || `demo${Date.now()}@test.com`);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"registered now, or already registered in an earlier run\", () => {",
+                  "  pm.expect([201, 400]).to.include(pm.response.code);",
+                  "  if (pm.response.code === 400) {",
+                  "    pm.expect(pm.response.json().message).to.eql(\"Email is already registered\");",
+                  "  }",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Email Demo User\",\n  \"tel\": \"0811112222\",\n  \"email\": \"{{demoUserEmail}}\",\n  \"password\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/register",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Demo user log-in",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.collectionVariables.set(\"demoUserToken\", pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{demoUserEmail}}\",\n  \"password\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Demo user create reservation (confirmation email is sent)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"reservation is created on 2027-05-11\", () => pm.expect(pm.response.json().data.reservationDate).to.include(\"2027-05-11\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{demoUserToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reservationDate\": \"2027-05-11\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/coworkingspaces/{{spaceId}}/reservations",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "coworkingspaces",
+                "{{spaceId}}",
+                "reservations"
+              ]
+            },
+            "description": "After this request, open the inbox of `demoInbox` (check the spam folder too). The email subject is `Reservation confirmed: <space name> on Tuesday, 11 May 2027`."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "99 Cleanup",
       "item": [
         {
@@ -3636,6 +3808,18 @@
     },
     {
       "key": "holidayTestReservationId",
+      "value": ""
+    },
+    {
+      "key": "demoInbox",
+      "value": ""
+    },
+    {
+      "key": "demoUserEmail",
+      "value": ""
+    },
+    {
+      "key": "demoUserToken",
       "value": ""
     }
   ]
