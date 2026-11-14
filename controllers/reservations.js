@@ -2,12 +2,35 @@ const Reservation = require("../models/Reservation");
 const CoworkingSpace = require("../models/CoworkingSpace");
 
 const Setting = require("../models/Setting");
+const { findThaiPublicHoliday } = require("../utils/holidays");
 
 // Start of today (00:00 server time), reservations from this point on are "active"
 const startOfToday = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return today;
+};
+
+// Check the date against the Thai public holiday API (in real time)
+// Return { status, message } if the reservation must be rejected, otherwise null
+const checkPublicHoliday = async (date) => {
+  try {
+    const holiday = await findThaiPublicHoliday(date);
+    if (holiday) {
+      return {
+        status: 400,
+        message: `Cannot reserve on ${holiday.date.iso.slice(0, 10)} because it is a Thai public holiday (${holiday.name})`,
+      };
+    }
+    return null;
+  } catch (err) {
+    console.log(`Holiday API error: ${err.message}`);
+    return {
+      status: 503,
+      message:
+        "Cannot check Thai public holidays right now, please try again later",
+    };
+  }
 };
 
 // @desc    Get all reservations
@@ -143,6 +166,14 @@ exports.addReservation = async (req, res, next) => {
       });
     }
 
+    // Reservation date must not be a Thai public holiday
+    const holidayError = await checkPublicHoliday(reservationDate);
+    if (holidayError) {
+      return res
+        .status(holidayError.status)
+        .json({ success: false, message: holidayError.message });
+    }
+
     // Create the reservation
     const reservation = await Reservation.create({
       reservationDate: req.body.reservationDate,
@@ -205,6 +236,13 @@ exports.updateReservation = async (req, res, next) => {
           success: false,
           message: "Reservation date cannot be in the past",
         });
+      }
+      // New date must not be a Thai public holiday
+      const holidayError = await checkPublicHoliday(reservationDate);
+      if (holidayError) {
+        return res
+          .status(holidayError.status)
+          .json({ success: false, message: holidayError.message });
       }
       updates.reservationDate = req.body.reservationDate;
     }

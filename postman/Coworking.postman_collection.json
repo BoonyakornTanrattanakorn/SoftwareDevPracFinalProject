@@ -3088,6 +3088,383 @@
       ]
     },
     {
+      "name": "AR4 Reject Reservations On Thai Public Holidays",
+      "item": [
+        {
+          "name": "Admin raise limit to 10 for this demo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"limit is 10\", () => pm.expect(pm.response.json().data.maxReservations).to.eql(10));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maxReservations\": 10\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/settings",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User create on Constitution Day (2026-12-10)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                  "pm.test(\"says it is a Thai public holiday\", () => pm.expect(pm.response.json().message).to.include(\"Thai public holiday\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reservationDate\": \"2026-12-10\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/coworkingspaces/{{spaceId}}/reservations",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "coworkingspaces",
+                "{{spaceId}}",
+                "reservations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User create on Songkran (2027-04-13)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                  "pm.test(\"says it is a Thai public holiday\", () => pm.expect(pm.response.json().message).to.include(\"Thai public holiday\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reservationDate\": \"2027-04-13\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/coworkingspaces/{{spaceId}}/reservations",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "coworkingspaces",
+                "{{spaceId}}",
+                "reservations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User create on a normal day (2026-12-15)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.collectionVariables.set(\"holidayTestReservationId\", pm.response.json().data._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reservationDate\": \"2026-12-15\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/coworkingspaces/{{spaceId}}/reservations",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "coworkingspaces",
+                "{{spaceId}}",
+                "reservations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User move it to King Bhumibol's Birthday (2026-12-05)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                  "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                  "pm.test(\"says it is a Thai public holiday\", () => pm.expect(pm.response.json().message).to.include(\"Thai public holiday\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reservationDate\": \"2026-12-05\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/{{holidayTestReservationId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "{{holidayTestReservationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reservation date is unchanged",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"still 2026-12-15\", () => pm.expect(pm.response.json().data.reservationDate).to.include(\"2026-12-15\"));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/reservations/{{holidayTestReservationId}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "reservations",
+                "{{holidayTestReservationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Admin set limit back to 3",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                  "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                  "pm.test(\"limit is 3\", () => pm.expect(pm.response.json().data.maxReservations).to.eql(3));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"maxReservations\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/settings",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "settings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "99 Cleanup",
       "item": [
         {
@@ -3255,6 +3632,10 @@
     },
     {
       "key": "newUserEmail",
+      "value": ""
+    },
+    {
+      "key": "holidayTestReservationId",
       "value": ""
     }
   ]
