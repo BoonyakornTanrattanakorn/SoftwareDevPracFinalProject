@@ -1937,6 +1937,61 @@
               "response": []
             },
             {
+              "name": "Create Extra Space",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                      "const json = pm.response.json();",
+                      "pm.test(\"success is true\", () => pm.expect(json.success).to.be.true);",
+                      "pm.collectionVariables.set(\"extraSpaceId\", json.data._id);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{adminToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Extra Space {{$timestamp}}\",\n  \"address\": \"99 Sukhumvit Rd, Bangkok\",\n  \"tel\": \"023333333\",\n  \"openTime\": \"09:00\",\n  \"closeTime\": \"22:00\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/coworkingspaces",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "coworkingspaces"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "Register User",
               "event": [
                 {
@@ -1999,7 +2054,7 @@
               "response": []
             },
             {
-              "name": "User create 1 active reservation",
+              "name": "User reservation 1 at Space 1",
               "event": [
                 {
                   "listen": "test",
@@ -2032,7 +2087,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"reservationDate\": \"2027-02-20\"\n}",
+                  "raw": "{\n  \"reservationDate\": \"2027-01-10\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2047,6 +2102,116 @@
                   "path": [
                     "coworkingspaces",
                     "{{spaceId}}",
+                    "reservations"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User reservation 2 at Space 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{userToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reservationDate\": \"2027-04-01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/coworkingspaces/{{spaceId2}}/reservations",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "coworkingspaces",
+                    "{{spaceId2}}",
+                    "reservations"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User reservation 3 at Extra Space",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{userToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reservationDate\": \"2027-01-12\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/coworkingspaces/{{extraSpaceId}}/reservations",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "coworkingspaces",
+                    "{{extraSpaceId}}",
                     "reservations"
                   ]
                 }
@@ -2361,6 +2526,51 @@
               "response": []
             },
             {
+              "name": "User still has 3 reservations after the limit is lowered to 2",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                      "const json = pm.response.json();",
+                      "pm.test(\"existing reservations are kept (3 of limit 2)\", () => pm.expect(json.count).to.eql(3));",
+                      "pm.test(\"the Extra Space reservation is still there\", () => {",
+                      "  const extraId = pm.collectionVariables.get(\"extraSpaceId\");",
+                      "  pm.expect(json.data.some((r) => r.coworkingSpace && r.coworkingSpace._id === extraId)).to.be.true;",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{userToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/reservations",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "reservations"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "User create - past date",
               "event": [
                 {
@@ -2417,15 +2627,16 @@
               "response": []
             },
             {
-              "name": "User create 2nd active reservation",
+              "name": "User create while over the new limit (has 3, limit 2)",
               "event": [
                 {
                   "listen": "test",
                   "script": {
                     "type": "text/javascript",
                     "exec": [
-                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
-                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);"
+                      "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
+                      "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
+                      "pm.test(\"message mentions the limit of 2\", () => pm.expect(pm.response.json().message).to.include(\"2 active\"));"
                     ]
                   }
                 }
@@ -2450,7 +2661,7 @@
                 },
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"reservationDate\": \"2027-04-01\"\n}",
+                  "raw": "{\n  \"reservationDate\": \"2027-04-02\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -2472,16 +2683,69 @@
               "response": []
             },
             {
-              "name": "User create over new limit of 2",
+              "name": "Admin raise limit to 4",
               "event": [
                 {
                   "listen": "test",
                   "script": {
                     "type": "text/javascript",
                     "exec": [
-                      "pm.test(\"Status 400\", () => pm.response.to.have.status(400));",
-                      "pm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.be.false);",
-                      "pm.test(\"message mentions the limit of 2\", () => pm.expect(pm.response.json().message).to.include(\"2 active\"));"
+                      "pm.test(\"Status 200\", () => pm.response.to.have.status(200));",
+                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);",
+                      "pm.test(\"limit is 4\", () => pm.expect(pm.response.json().data.maxReservations).to.eql(4));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{adminToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"maxReservations\": 4\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/settings",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User create after limit raised",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
+                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);"
                     ]
                   }
                 }
@@ -2576,61 +2840,6 @@
                   ],
                   "path": [
                     "settings"
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "User create after limit raised",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status 201\", () => pm.response.to.have.status(201));",
-                      "pm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.be.true);"
-                    ]
-                  }
-                }
-              ],
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "auth": {
-                  "type": "bearer",
-                  "bearer": [
-                    {
-                      "key": "token",
-                      "value": "{{userToken}}",
-                      "type": "string"
-                    }
-                  ]
-                },
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"reservationDate\": \"2027-04-02\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseURL}}/coworkingspaces/{{spaceId}}/reservations",
-                  "host": [
-                    "{{baseURL}}"
-                  ],
-                  "path": [
-                    "coworkingspaces",
-                    "{{spaceId}}",
-                    "reservations"
                   ]
                 }
               },
@@ -4528,6 +4737,45 @@
               "response": []
             },
             {
+              "name": "Delete Extra Space",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status 200\", () => pm.response.to.have.status(200));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{adminToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseURL}}/coworkingspaces/{{extraSpaceId}}",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "coworkingspaces",
+                    "{{extraSpaceId}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
               "name": "User favourites are cleared after spaces are deleted",
               "event": [
                 {
@@ -4604,6 +4852,10 @@
     },
     {
       "key": "spaceId2",
+      "value": ""
+    },
+    {
+      "key": "extraSpaceId",
       "value": ""
     },
     {
