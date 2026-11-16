@@ -1,0 +1,74 @@
+@startuml Co-working Space Use Case Diagram
+left to right direction
+title "Co-working Space Reservation System"
+
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam nodesep 25
+skinparam ranksep 90
+skinparam usecase {
+  BackgroundColor #FFFBEA
+  BorderColor #334155
+}
+skinparam actor {
+  BackgroundColor white
+  BorderColor #334155
+}
+skinparam rectangle {
+  BackgroundColor #F8FAFC
+  BorderColor #334155
+}
+skinparam ArrowColor #334155
+
+' ---- left side actors (single dash = stacked in the same column)
+actor "Guest" as guest
+actor "User" as user
+user -|> guest
+
+' ---- right side actor
+actor "Admin" as admin
+
+rectangle "Co-working Space Reservation System" {
+  usecase "Register\n(name, tel, email, password)" as UC_register #FFE4E4;line:red;text:red
+  usecase "Login" as UC_login
+  usecase "View co-working\nspace list" as UC_list
+  usecase "View co-working\nspace detail" as UC_detail
+  usecase "Logout\n(now requires login)" as UC_logout
+  usecase "View own profile" as UC_me
+  usecase "Reserve a co-working space\n(date required, max 3)" as UC_reserve
+  usecase "View own reservations\n(detail is owner-only)" as UC_viewOwn
+  usecase "Edit own reservation\n(date / space only)" as UC_editOwn
+  usecase "Delete own reservation" as UC_deleteOwn
+  usecase "View any reservation\n(all, or by space)" as UC_viewAny
+  usecase "Edit any reservation" as UC_editAny
+  usecase "Delete any reservation" as UC_deleteAny
+  usecase "Create / update / delete\nco-working space" as UC_manage
+  usecase "Reserve without\n3-reservation limit" as UC_noLimit
+}
+
+guest --> UC_register
+guest --> UC_login
+guest --> UC_list
+guest --> UC_detail
+
+user --> UC_logout
+user --> UC_me
+user --> UC_reserve
+user --> UC_viewOwn
+user --> UC_editOwn
+user --> UC_deleteOwn
+
+' "UC <-- admin" puts admin to the right of the system box
+UC_viewAny <-- admin
+UC_editAny <-- admin
+UC_deleteAny <-- admin
+UC_manage <-- admin
+UC_noLimit <-- admin
+
+note right of admin
+  Admin can also do every
+  User use case (login, logout,
+  reserve, view/edit/delete).
+end note
+
+@enduml

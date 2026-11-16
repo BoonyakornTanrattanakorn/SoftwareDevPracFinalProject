@@ -1,45 +1,38 @@
-# UML Diagrams: Co-working Space Reservation API
+# UML Diagrams (PlantUML)
 
-**Red** marks what changed from Assignment 7 (VacQ). Hospital → CoworkingSpace and Appointment → Reservation are renames, so they are not marked.
-Each diagram is available as SVG (sharp at any zoom) and as a 2× PNG for slides. Link the SVG or PNG from a slide if the picture is too small to read.
+The diagrams are written in PlantUML, in the same style as the VacQ sample. Paste a `.puml` file into
+https://www.plantuml.com/plantuml or open it with the VS Code PlantUML extension, then export PNG/SVG for the slides.
 
-To regenerate after editing labels: `python docs/uml/gen_uml.py docs/uml` (strings starting with `!` are drawn in red).
+Ready-made images are in `img/` (PNG at 2x for slides, SVG sharp at any zoom). They are drawn by `gen_uml.py`, which reads the
+sequence `.puml` files directly, so edit the `.puml` and redraw with:
 
-## Use Case Diagram
+```
+python docs/gen_uml.py docs/img docs/puml
+```
 
-![Use case](uml/01-use-case.png)
+`gen_uml.py` writes SVG only. To refresh the PNGs, convert them with e.g. `magick -density 192 file.svg file.png`.
+The use case and class images are laid out by hand inside `gen_uml.py` (functions `use_case` and `class_profile`).
 
-[SVG](uml/01-use-case.svg) · [PNG](uml/01-use-case.png)
+**Red** marks what changed from Assignment 7 (VacQ). Hospital -> CoworkingSpace and Appointment -> Reservation are renames, so they are not marked.
 
-## Class Diagram (UML Profile)
-
-«Application» → «Resource» (labelled with the URI path) → «Representation» (the model data the resource returns).
-
-![Class diagram](uml/02-class-diagram-uml-profile.png)
-
-[SVG](uml/02-class-diagram-uml-profile.svg) · [PNG](uml/02-class-diagram-uml-profile.png)
-
-## Sequence Diagrams
-
-| # | Flow | Changed from VacQ? | Files |
+| File | Diagram | Changed from VacQ? | Image |
 |---|---|---|---|
-| 03 | Register | Yes: tel, duplicate-email message, error message | [SVG](uml/03-seq-register.svg) · [PNG](uml/03-seq-register.png) |
-| 04 | Login | Yes: 401 for unknown email, tel in response | [SVG](uml/04-seq-login.svg) · [PNG](uml/04-seq-login.png) |
-| 05 | Logout | Yes: now protected | [SVG](uml/05-seq-logout.svg) · [PNG](uml/05-seq-logout.png) |
-| 06 | protect + authorize | Yes: 401 status codes, deleted-user check | [SVG](uml/06-seq-protect-authorize.svg) · [PNG](uml/06-seq-protect-authorize.png) |
-| 07 | View space list | Minor: error message | [SVG](uml/07-seq-get-spaces.svg) · [PNG](uml/07-seq-get-spaces.png) |
-| 08 | View space detail | Minor: 404 instead of 400 | [SVG](uml/08-seq-get-space.svg) · [PNG](uml/08-seq-get-space.png) |
-| 09 | Reserve (max 3) | **Yes**: date check, countDocuments, whitelist, invalid-date 400 | [SVG](uml/09-seq-add-reservation.svg) · [PNG](uml/09-seq-add-reservation.png) |
-| 10 | View reservations | No | [SVG](uml/10-seq-get-reservations.svg) · [PNG](uml/10-seq-get-reservations.png) |
-| 11 | View one reservation | **Yes**: new owner-or-admin check | [SVG](uml/11-seq-get-reservation.svg) · [PNG](uml/11-seq-get-reservation.png) |
-| 12 | Edit reservation | **Yes**: field whitelist, new-space check | [SVG](uml/12-seq-update-reservation.svg) · [PNG](uml/12-seq-update-reservation.png) |
-| 13 | Delete reservation | No | [SVG](uml/13-seq-delete-reservation.svg) · [PNG](uml/13-seq-delete-reservation.png) |
-| 14 | Admin deletes space (cascade) | No | [SVG](uml/14-seq-delete-space.svg) · [PNG](uml/14-seq-delete-space.png) |
+| `puml/00-use-case.puml` | Use case diagram | Register (tel), Logout, View own, Edit own | [PNG](img/00-use-case.png) · [SVG](img/00-use-case.svg) |
+| `puml/00-class-diagram.puml` | Class diagram (UML Profile: Application / Resource / Representation) | tel, openTime/closeTime, logout, get/update reservation | [PNG](img/00-class-diagram.png) · [SVG](img/00-class-diagram.svg) |
+| `puml/01-auth-register.puml` | Auth (POST register) | **Yes**: tel | [PNG](img/01-auth-register.png) · [SVG](img/01-auth-register.svg) |
+| `puml/02-auth-login.puml` | Auth (POST login) | **Yes**: tel in response | [PNG](img/02-auth-login.png) · [SVG](img/02-auth-login.svg) |
+| `puml/03-auth-logout.puml` | Auth (GET logout) | **Yes**: now requires login | [PNG](img/03-auth-logout.png) · [SVG](img/03-auth-logout.svg) |
+| `puml/04-auth-me.puml` | Auth (GET me) | No | [PNG](img/04-auth-me.png) · [SVG](img/04-auth-me.svg) |
+| `puml/05-middleware-protect-authorize.puml` | protect + authorize | No | [PNG](img/05-middleware-protect-authorize.png) · [SVG](img/05-middleware-protect-authorize.svg) |
+| `puml/06-coworkingspace-get-all.puml` | Manage Co-working Space (GET all) | No | [PNG](img/06-coworkingspace-get-all.png) · [SVG](img/06-coworkingspace-get-all.svg) |
+| `puml/07-coworkingspace-get-one.puml` | Manage Co-working Space (GET one) | No | [PNG](img/07-coworkingspace-get-one.png) · [SVG](img/07-coworkingspace-get-one.svg) |
+| `puml/08-coworkingspace-create.puml` | Manage Co-working Space (POST) | No | [PNG](img/08-coworkingspace-create.png) · [SVG](img/08-coworkingspace-create.svg) |
+| `puml/09-coworkingspace-update.puml` | Manage Co-working Space (PUT) | No | [PNG](img/09-coworkingspace-update.png) · [SVG](img/09-coworkingspace-update.svg) |
+| `puml/10-coworkingspace-delete.puml` | Manage Co-working Space (DELETE, cascade) | No | [PNG](img/10-coworkingspace-delete.png) · [SVG](img/10-coworkingspace-delete.svg) |
+| `puml/11-reservation-get-all.puml` | Manage Reservation (GET all) | No | [PNG](img/11-reservation-get-all.png) · [SVG](img/11-reservation-get-all.svg) |
+| `puml/12-reservation-get-one.puml` | Manage Reservation (GET one) | **Yes**: owner or admin only | [PNG](img/12-reservation-get-one.png) · [SVG](img/12-reservation-get-one.svg) |
+| `puml/13-reservation-create.puml` | Manage Reservation (POST) | No | [PNG](img/13-reservation-create.png) · [SVG](img/13-reservation-create.svg) |
+| `puml/14-reservation-update.puml` | Manage Reservation (PUT) | **Yes**: only date / space editable, new space must exist | [PNG](img/14-reservation-update.png) · [SVG](img/14-reservation-update.svg) |
+| `puml/15-reservation-delete.puml` | Manage Reservation (DELETE) | No | [PNG](img/15-reservation-delete.png) · [SVG](img/15-reservation-delete.svg) |
 
-![Register](uml/03-seq-register.png)
-![Login](uml/04-seq-login.png)
-![Logout](uml/05-seq-logout.png)
-![protect + authorize](uml/06-seq-protect-authorize.png)
-![Reserve](uml/09-seq-add-reservation.png)
-![View one reservation](uml/11-seq-get-reservation.png)
-![Edit reservation](uml/12-seq-update-reservation.png)
+The full code-change list is in [CHANGES_FROM_ASSIGNMENT7.md](CHANGES_FROM_ASSIGNMENT7.md).

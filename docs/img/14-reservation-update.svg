@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2193" height="1128" viewBox="0 0 2193 1128" font-family="Arial, Helvetica, sans-serif">
+<defs>
+<marker id="filled" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="hollow" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M1,1 L15,8 L1,15 z" fill="#ffffff" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="filledR" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#c81e1e"/></marker>
+<marker id="openR" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#c81e1e" stroke-width="1.6"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="16.0" y="26.0" font-size="16" text-anchor="start" fill="#1f2933" font-weight="bold">Manage Reservation (PUT)</text>
+<line x1="2089.8" y1="98" x2="2089.8" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1895.3" y1="98" x2="1895.3" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1733.8" y1="98" x2="1733.8" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1566.6" y1="98" x2="1566.6" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1106.7" y1="98" x2="1106.7" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="936.9" y1="98" x2="936.9" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="669.3" y1="98" x2="669.3" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="339.4" y1="98" x2="339.4" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="75.0" y1="98" x2="75.0" y2="1090" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="24" y="592" width="2145.4845" height="172" fill="none" stroke="#64748b" stroke-width="1.2"/>
+<path d="M24,592 h44 v12 l-8,8 h-36 z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/>
+<rect x="24" y="774" width="2145.4845" height="272" fill="none" stroke="#64748b" stroke-width="1.2"/>
+<path d="M24,774 h44 v12 l-8,8 h-36 z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/>
+<line x1="24" y1="840" x2="2169.4845" y2="840" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 4"/>
+<rect x="12" y="384" width="2169.4845" height="680" fill="none" stroke="#64748b" stroke-width="1.2"/>
+<path d="M12,384 h44 v12 l-8,8 h-36 z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/>
+<line x1="12" y1="450" x2="2181.4845" y2="450" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 4"/>
+<line x1="12" y1="516" x2="2181.4845" y2="516" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 4"/>
+<rect x="931.9" y="204.0" width="10" height="44.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1728.8" y="306.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1561.6" y="272.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="2084.8" y="678.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1890.3" y="644.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1728.8" y="926.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1561.6" y="892.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1101.7" y="238.0" width="10" height="836.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="334.4" y="136.0" width="10" height="944.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="664.3" y="170.0" width="10" height="910.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="30.0" y="52" width="90.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="75.0" y="80.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">Client</text>
+<rect x="280.6" y="52" width="117.5" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="339.4" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«javaScript»</text>
+<text x="339.4" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:server</text>
+<rect x="609.3" y="52" width="120.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="669.3" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«router»</text>
+<text x="669.3" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="876.8" y="52" width="120.3" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="936.9" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«middleware»</text>
+<text x="936.9" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:auth</text>
+<rect x="1046.6" y="52" width="120.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1106.7" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«controllers»</text>
+<text x="1106.7" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="1509.6" y="52" width="113.9" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1566.6" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«model»</text>
+<text x="1566.6" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:Reservation</text>
+<path d="M1673.8,59 a60.0,7 0 0,0 120.0,0 v32 a60.0,7 0 0,1 -120.0,0 z" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<ellipse cx="1733.8" cy="59" rx="60.0" ry="7" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1733.8" y="76.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«MongoDB»</text>
+<text x="1733.8" y="92.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="1823.8" y="52" width="143.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1895.3" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«model»</text>
+<text x="1895.3" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:CoworkingSpace</text>
+<path d="M2016.1,59 a73.7,7 0 0,0 147.4,0 v32 a73.7,7 0 0,1 -147.4,0 z" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<ellipse cx="2089.8" cy="59" rx="73.7" ry="7" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="2089.8" y="76.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«MongoDB»</text>
+<text x="2089.8" y="92.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:coworkingspaces</text>
+<rect x="92.0" y="115.0" width="230.4" height="18" fill="#ffffff"/><text x="207.2" y="128.0" font-size="13" text-anchor="middle" fill="#1f2933">req.put(&#x27;/api/v1/reservations/:id&#x27;)</text>
+<line x1="75.0" y1="136" x2="334.4" y2="136" stroke="#334155" stroke-width="1.4"/>
+<polygon points="324.4,141.0 334.4,136.0 324.4,131.0" fill="#334155"/>
+<rect x="356.4" y="149.0" width="295.9" height="18" fill="#ffffff"/><text x="504.3" y="162.0" font-size="13" text-anchor="middle" fill="#1f2933">app.use(&#x27;/api/v1/reservations&#x27;,reservations)</text>
+<line x1="344.4" y1="170" x2="664.3" y2="170" stroke="#334155" stroke-width="1.4"/>
+<polygon points="654.3,175.0 664.3,170.0 654.3,165.0" fill="#334155"/>
+<rect x="686.3" y="183.0" width="233.6" height="18" fill="#ffffff"/><text x="803.1" y="196.0" font-size="13" text-anchor="middle" fill="#1f2933">protect, authorize(&quot;admin&quot;,&quot;user&quot;)</text>
+<line x1="674.3" y1="204" x2="931.9" y2="204" stroke="#334155" stroke-width="1.4"/>
+<polygon points="921.9,209.0 931.9,204.0 921.9,199.0" fill="#334155"/>
+<rect x="953.9" y="217.0" width="135.7" height="18" fill="#ffffff"/><text x="1021.8" y="230.0" font-size="13" text-anchor="middle" fill="#1f2933">updateReservation()</text>
+<line x1="941.9" y1="238" x2="1101.7" y2="238" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1091.7,243.0 1101.7,238.0 1091.7,233.0" fill="#334155"/>
+<rect x="1256.6" y="251.0" width="160.1" height="18" fill="#ffffff"/><text x="1336.6" y="264.0" font-size="13" text-anchor="middle" fill="#1f2933">findById(req.params.id)</text>
+<line x1="1111.7" y1="272" x2="1561.6" y2="272" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1551.6,277.0 1561.6,272.0 1551.6,267.0" fill="#334155"/>
+<rect x="1583.6" y="285.0" width="133.3" height="18" fill="#ffffff"/><text x="1650.2" y="298.0" font-size="13" text-anchor="middle" fill="#1f2933">ReservationSchema</text>
+<line x1="1571.6" y1="306" x2="1728.8" y2="306" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1718.8,311.0 1728.8,306.0 1718.8,301.0" fill="#334155"/>
+<rect x="1608.8" y="319.0" width="82.7" height="18" fill="#ffffff"/><text x="1650.2" y="332.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1728.8" y1="340" x2="1571.6" y2="340" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1582.6,334.0 1571.6,340.0 1582.6,346.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="1295.3" y="353.0" width="82.7" height="18" fill="#ffffff"/><text x="1336.6" y="366.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1561.6" y1="374" x2="1111.7" y2="374" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1122.7,368.0 1111.7,374.0 1122.7,380.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="65.0" y="391.0" width="70.6" height="17" fill="#ffffff"/><text x="68.0" y="403.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[not found]</text>
+<rect x="472.5" y="415.0" width="236.8" height="18" fill="#ffffff"/><text x="590.8" y="428.0" font-size="13" text-anchor="middle" fill="#1f2933">404 No reservation with the id of ...</text>
+<line x1="1101.7" y1="436" x2="75.0" y2="436" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,431.0 75.0,436.0 85.0,441.0" fill="#334155"/>
+<rect x="19.0" y="457.0" width="159.1" height="17" fill="#ffffff"/><text x="22.0" y="469.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[not owner and not admin]</text>
+<rect x="406.6" y="481.0" width="368.4" height="18" fill="#ffffff"/><text x="590.8" y="494.0" font-size="13" text-anchor="middle" fill="#1f2933">401 User ... is not authorized to update this reservation</text>
+<line x1="1101.7" y1="502" x2="75.0" y2="502" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,497.0 75.0,502.0 85.0,507.0" fill="#334155"/>
+<rect x="1114.7" y="547.0" width="258.1" height="18" fill="#ffffff"/><text x="1117.7" y="560.0" font-size="13" text-anchor="start" fill="#1f2933">updates = {reservationDate} (whitelist)</text>
+<polyline points="1111.7,568 1145.7,568 1145.7,584 1111.7,584" fill="none" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1121.7,579.0 1111.7,584.0 1121.7,589.0" fill="#334155"/>
+<rect x="77.0" y="599.0" width="197.4" height="17" fill="#ffffff"/><text x="80.0" y="611.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[req.body.coworkingSpace given]</text>
+<rect x="1383.8" y="623.0" width="234.4" height="18" fill="#ffffff"/><text x="1501.0" y="636.0" font-size="13" text-anchor="middle" fill="#1f2933">findById(req.body.coworkingSpace)</text>
+<line x1="1111.7" y1="644" x2="1890.3" y2="644" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1880.3,649.0 1890.3,644.0 1880.3,639.0" fill="#334155"/>
+<rect x="1912.3" y="657.0" width="160.4" height="18" fill="#ffffff"/><text x="1992.5" y="670.0" font-size="13" text-anchor="middle" fill="#1f2933">CoworkingSpaceSchema</text>
+<line x1="1900.3" y1="678" x2="2084.8" y2="678" stroke="#334155" stroke-width="1.4"/>
+<polygon points="2074.8,683.0 2084.8,678.0 2074.8,673.0" fill="#334155"/>
+<rect x="1937.6" y="691.0" width="109.9" height="18" fill="#ffffff"/><text x="1992.5" y="704.0" font-size="13" text-anchor="middle" fill="#1f2933">coworkingSpace</text>
+<line x1="2084.8" y1="712" x2="1900.3" y2="712" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1911.3,706.0 1900.3,712.0 1911.3,718.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="1446.1" y="725.0" width="109.9" height="18" fill="#ffffff"/><text x="1501.0" y="738.0" font-size="13" text-anchor="middle" fill="#1f2933">coworkingSpace</text>
+<line x1="1890.3" y1="746" x2="1111.7" y2="746" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1122.7,740.0 1111.7,746.0 1122.7,752.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<text x="30.0" y="607.0" font-size="12" text-anchor="start" fill="#1f2933" font-weight="bold">opt</text>
+<rect x="77.0" y="781.0" width="227.9" height="17" fill="#ffffff"/><text x="80.0" y="793.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[coworkingSpace given but not found]</text>
+<rect x="454.1" y="805.0" width="273.5" height="18" fill="#ffffff"/><text x="590.8" y="818.0" font-size="13" text-anchor="middle" fill="#1f2933">404 No co-working space with the id of ...</text>
+<line x1="1101.7" y1="826" x2="75.0" y2="826" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,821.0 75.0,826.0 85.0,831.0" fill="#334155"/>
+<rect x="1123.7" y="871.0" width="425.9" height="18" fill="#ffffff"/><text x="1336.6" y="884.0" font-size="13" text-anchor="middle" fill="#1f2933">findByIdAndUpdate(req.params.id, updates, {new, runValidators})</text>
+<line x1="1111.7" y1="892" x2="1561.6" y2="892" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1551.6,897.0 1561.6,892.0 1551.6,887.0" fill="#334155"/>
+<rect x="1583.6" y="905.0" width="133.3" height="18" fill="#ffffff"/><text x="1650.2" y="918.0" font-size="13" text-anchor="middle" fill="#1f2933">ReservationSchema</text>
+<line x1="1571.6" y1="926" x2="1728.8" y2="926" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1718.8,931.0 1728.8,926.0 1718.8,921.0" fill="#334155"/>
+<rect x="1608.8" y="939.0" width="82.7" height="18" fill="#ffffff"/><text x="1650.2" y="952.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1728.8" y1="960" x2="1571.6" y2="960" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1582.6,954.0 1571.6,960.0 1582.6,966.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="1295.3" y="973.0" width="82.7" height="18" fill="#ffffff"/><text x="1336.6" y="986.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1561.6" y1="994" x2="1111.7" y2="994" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1122.7,988.0 1111.7,994.0 1122.7,1000.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="484.9" y="1007.0" width="211.9" height="18" fill="#ffffff"/><text x="590.8" y="1020.0" font-size="13" text-anchor="middle" fill="#1f2933">200 {success, data: reservation}</text>
+<line x1="1101.7" y1="1028" x2="75.0" y2="1028" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,1023.0 75.0,1028.0 85.0,1033.0" fill="#334155"/>
+<text x="30.0" y="789.0" font-size="12" text-anchor="start" fill="#1f2933" font-weight="bold">alt</text>
+<text x="18.0" y="399.0" font-size="12" text-anchor="start" fill="#1f2933" font-weight="bold">alt</text>
+</svg>

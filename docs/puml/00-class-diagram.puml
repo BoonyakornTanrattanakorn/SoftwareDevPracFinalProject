@@ -1,0 +1,109 @@
+@startuml Co-working Space Class Diagram (UML Profile)
+title "Co-working Space Class Diagram (UML Profile)"
+
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam linetype polyline
+skinparam nodesep 70
+skinparam ranksep 90
+skinparam class {
+  BackgroundColor #FFFBEA
+  HeaderBackgroundColor #FDE68A
+  BorderColor #334155
+  ArrowColor #334155
+}
+skinparam package {
+  BackgroundColor white
+  BorderColor #94A3B8
+}
+hide circle
+hide empty members
+
+package "CoworkingSpaceService" {
+    ' ---- row 0
+    class "<<Application>>\nCoworkingSpaceService" as Service
+
+    ' ---- row 1
+    class "<<Resource>>\nAuth" as ResourceAuth {
+        <<POST>> <color:red>+register(name, tel, email, password): token</color>
+        <<POST>> +login(email, password): token
+        <<GET>> +getMe(): User
+        <<GET>> +logout(): void  {login required}
+    }
+
+    class "<<Resource>>\nCoworkingSpaces" as ResourceCoworkingSpaces {
+        <<GET>> +getCoworkingSpaces(): CoworkingSpace
+        <<POST>> +createCoworkingSpace(): CoworkingSpace
+    }
+
+    class "<<Resource>>\nReservations" as ResourceReservations {
+        <<GET>> +getReservations(): Reservation
+        <<POST>> +addReservation(reservationDate): Reservation
+    }
+
+    ' ---- row 2
+    class "<<Resource>>\nCoworkingSpace" as ResourceCoworkingSpace {
+        <<GET>> +getCoworkingSpace(): CoworkingSpace
+        <<PUT>> +updateCoworkingSpace(): CoworkingSpace
+        <<DELETE>> +deleteCoworkingSpace(): void
+    }
+
+    class "<<Resource>>\nReservation" as ResourceReservation {
+        <<GET>> +getReservation(): Reservation  {owner or admin}
+        <<PUT>> +updateReservation(reservationDate, coworkingSpace): Reservation
+        <<DELETE>> +deleteReservation(): void
+    }
+
+    ' ---- row 3
+    class "<<Representation>>\nUser" as RepresentationUser {
+        -name
+        -email
+        <color:red>-tel</color>
+        -role
+        -password
+        -createdAt
+    }
+
+    class "<<Representation>>\nCoworkingSpace" as RepresentationCoworkingSpace {
+        -name
+        -address
+        -tel (required)
+        <color:red>-openTime (HH:mm)</color>
+        <color:red>-closeTime (HH:mm)</color>
+    }
+
+    class "<<Representation>>\nReservation" as RepresentationReservation {
+        -reservationDate
+        -user
+        -coworkingSpace
+        -createdAt
+    }
+}
+
+' ---- paths (all point down one row)
+Service ..> ResourceAuth : "/auth\n<<Path>>"
+Service ..> ResourceCoworkingSpaces : "/coworkingspaces\n<<Path>>"
+Service ..> ResourceReservations : "/reservations\n<<Path>>"
+ResourceCoworkingSpaces ..> ResourceCoworkingSpace : "/{coworkingSpaceId}\n<<Path>>"
+ResourceReservations ..> ResourceReservation : "/{reservationId}\n<<Path>>"
+
+' nested route goes back up a row; "up" keeps it from reshuffling the rows
+ResourceCoworkingSpace .up.> ResourceReservations : "/reservations\n<<Path>>"
+
+' ---- representations (Auth skips a row, so its arrow is longer)
+ResourceAuth ...> RepresentationUser : "<<use>>"
+ResourceCoworkingSpace ..> RepresentationCoworkingSpace : "<<use>>"
+ResourceReservation ..> RepresentationReservation : "<<use>>"
+
+' ---- keep the left-to-right order fixed
+ResourceAuth -[hidden]right- ResourceCoworkingSpaces
+ResourceCoworkingSpaces -[hidden]right- ResourceReservations
+RepresentationUser -[hidden]right- RepresentationCoworkingSpace
+RepresentationCoworkingSpace -[hidden]right- RepresentationReservation
+
+note bottom of RepresentationCoworkingSpace
+  removed from Hospital:
+  district, province, postalcode, region
+end note
+
+@enduml

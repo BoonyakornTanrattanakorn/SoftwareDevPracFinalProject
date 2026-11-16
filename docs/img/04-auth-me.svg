@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1177" height="472" viewBox="0 0 1177 472" font-family="Arial, Helvetica, sans-serif">
+<defs>
+<marker id="filled" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="hollow" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M1,1 L15,8 L1,15 z" fill="#ffffff" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="filledR" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#c81e1e"/></marker>
+<marker id="openR" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#c81e1e" stroke-width="1.6"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="16.0" y="26.0" font-size="16" text-anchor="start" fill="#1f2933" font-weight="bold">Auth (GET me)</text>
+<line x1="1095.7" y1="98" x2="1095.7" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="969.0" y1="98" x2="969.0" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="793.3" y1="98" x2="793.3" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="643.1" y1="98" x2="643.1" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="508.0" y1="98" x2="508.0" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="287.8" y1="98" x2="287.8" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="75.0" y1="98" x2="75.0" y2="434" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="638.1" y="204.0" width="10" height="44.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1090.7" y="306.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="964.0" y="272.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="788.3" y="238.0" width="10" height="170.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="282.8" y="136.0" width="10" height="288.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="503.0" y="170.0" width="10" height="254.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="30.0" y="52" width="90.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="75.0" y="80.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">Client</text>
+<rect x="229.0" y="52" width="117.5" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="287.8" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«javaScript»</text>
+<text x="287.8" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:server</text>
+<rect x="463.0" y="52" width="90.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="508.0" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«router»</text>
+<text x="508.0" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:auth</text>
+<rect x="583.0" y="52" width="120.3" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="643.1" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«middleware»</text>
+<text x="643.1" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:auth</text>
+<rect x="733.3" y="52" width="120.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="793.3" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«controllers»</text>
+<text x="793.3" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:auth</text>
+<rect x="924.0" y="52" width="90.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="969.0" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«model»</text>
+<text x="969.0" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:User</text>
+<path d="M1044.0,59 a51.7,7 0 0,0 103.5,0 v32 a51.7,7 0 0,1 -103.5,0 z" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<ellipse cx="1095.7" cy="59" rx="51.7" ry="7" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1095.7" y="76.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«MongoDB»</text>
+<text x="1095.7" y="92.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:users</text>
+<rect x="92.0" y="115.0" width="178.8" height="18" fill="#ffffff"/><text x="181.4" y="128.0" font-size="13" text-anchor="middle" fill="#1f2933">req.get(&#x27;/api/v1/auth/me&#x27;)</text>
+<line x1="75.0" y1="136" x2="282.8" y2="136" stroke="#334155" stroke-width="1.4"/>
+<polygon points="272.8,141.0 282.8,136.0 272.8,131.0" fill="#334155"/>
+<rect x="304.8" y="149.0" width="186.2" height="18" fill="#ffffff"/><text x="397.9" y="162.0" font-size="13" text-anchor="middle" fill="#1f2933">app.use(&#x27;/api/v1/auth&#x27;,auth)</text>
+<line x1="292.8" y1="170" x2="503.0" y2="170" stroke="#334155" stroke-width="1.4"/>
+<polygon points="493.0,175.0 503.0,170.0 493.0,165.0" fill="#334155"/>
+<rect x="547.0" y="183.0" width="57.0" height="18" fill="#ffffff"/><text x="575.5" y="196.0" font-size="13" text-anchor="middle" fill="#1f2933">protect</text>
+<line x1="513.0" y1="204" x2="638.1" y2="204" stroke="#334155" stroke-width="1.4"/>
+<polygon points="628.1,209.0 638.1,204.0 628.1,199.0" fill="#334155"/>
+<rect x="691.2" y="217.0" width="54.0" height="18" fill="#ffffff"/><text x="718.2" y="230.0" font-size="13" text-anchor="middle" fill="#1f2933">getMe()</text>
+<line x1="648.1" y1="238" x2="788.3" y2="238" stroke="#334155" stroke-width="1.4"/>
+<polygon points="778.3,243.0 788.3,238.0 778.3,233.0" fill="#334155"/>
+<rect x="810.3" y="251.0" width="141.7" height="18" fill="#ffffff"/><text x="881.1" y="264.0" font-size="13" text-anchor="middle" fill="#1f2933">findById(req.user.id)</text>
+<line x1="798.3" y1="272" x2="964.0" y2="272" stroke="#334155" stroke-width="1.4"/>
+<polygon points="954.0,277.0 964.0,272.0 954.0,267.0" fill="#334155"/>
+<rect x="989.5" y="285.0" width="85.7" height="18" fill="#ffffff"/><text x="1032.4" y="298.0" font-size="13" text-anchor="middle" fill="#1f2933">UserSchema</text>
+<line x1="974.0" y1="306" x2="1090.7" y2="306" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1080.7,311.0 1090.7,306.0 1080.7,301.0" fill="#334155"/>
+<rect x="1014.8" y="319.0" width="35.1" height="18" fill="#ffffff"/><text x="1032.4" y="332.0" font-size="13" text-anchor="middle" fill="#1f2933">user</text>
+<line x1="1090.7" y1="340" x2="974.0" y2="340" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="985.0,334.0 974.0,340.0 985.0,346.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="863.6" y="353.0" width="35.1" height="18" fill="#ffffff"/><text x="881.1" y="366.0" font-size="13" text-anchor="middle" fill="#1f2933">user</text>
+<line x1="964.0" y1="374" x2="798.3" y2="374" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="809.3,368.0 798.3,374.0 809.3,380.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="352.0" y="387.0" width="164.3" height="18" fill="#ffffff"/><text x="434.1" y="400.0" font-size="13" text-anchor="middle" fill="#1f2933">200 {success, data: user}</text>
+<line x1="788.3" y1="408" x2="75.0" y2="408" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,403.0 75.0,408.0 85.0,413.0" fill="#334155"/>
+</svg>

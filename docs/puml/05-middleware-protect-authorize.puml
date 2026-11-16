@@ -1,0 +1,54 @@
+@startuml Middleware (protect + authorize)
+
+title "Middleware (protect + authorize) - used by every private route"
+
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam ArrowColor #334155
+skinparam ParticipantBackgroundColor #FDE68A
+skinparam ParticipantBorderColor #334155
+skinparam DatabaseBackgroundColor #FDE68A
+skinparam DatabaseBorderColor #334155
+skinparam SequenceLifeLineBorderColor #94A3B8
+skinparam SequenceGroupBorderColor #64748B
+skinparam SequenceGroupHeaderFontStyle bold
+skinparam SequenceGroupBackgroundColor #E2E8F0
+skinparam LegendBackgroundColor #FFFBEA
+skinparam LegendBorderColor #94A3B8
+
+participant "Client" as client
+participant "<<javaScript>>\n:server" as server
+participant "<<router>>\n:any private route" as router
+participant "<<middleware>>\n:auth" as middlewareAuth
+participant "<<model>>\n:User" as modelUser
+database "<<MongoDB>>\n:users" as UsersDatabase
+participant "<<controllers>>\n:target" as controllers
+
+client->server ++:req (Authorization: Bearer token)
+server->router ++:app.use(...)
+router -> middlewareAuth ++:protect
+alt no token / token == "null"
+    middlewareAuth -> client :401 Not authorized to access this route
+else
+    middlewareAuth -> middlewareAuth :jwt.verify(token, JWT_SECRET)
+    alt verify fails
+        middlewareAuth -> client :401 Not authorized to access this route
+    else
+        middlewareAuth -> modelUser ++:findById(decoded.id)
+        modelUser ->UsersDatabase ++: UserSchema
+        UsersDatabase --> modelUser --: user
+        middlewareAuth <-- modelUser --:user (req.user)
+        alt user == null (account deleted)
+            middlewareAuth -> client :401 Not authorized to access this route
+        else authorize(...roles): req.user.role not in roles
+            middlewareAuth -> client :401 User role X is not authorized
+        else
+            middlewareAuth -> controllers ++:next()
+            controllers -> client --:response
+        end
+    end
+end
+deactivate middlewareAuth
+
+@enduml

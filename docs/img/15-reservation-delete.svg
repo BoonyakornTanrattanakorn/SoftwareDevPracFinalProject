@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1573" height="786" viewBox="0 0 1573 786" font-family="Arial, Helvetica, sans-serif">
+<defs>
+<marker id="filled" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker>
+<marker id="open" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="hollow" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M1,1 L15,8 L1,15 z" fill="#ffffff" stroke="#334155" stroke-width="1.4"/></marker>
+<marker id="filledR" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L10,5 L0,10 z" fill="#c81e1e"/></marker>
+<marker id="openR" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+  <path d="M0,0 L11,6 L0,12" fill="none" stroke="#c81e1e" stroke-width="1.6"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="16.0" y="26.0" font-size="16" text-anchor="start" fill="#1f2933" font-weight="bold">Manage Reservation (DELETE)</text>
+<line x1="1483.1" y1="98" x2="1483.1" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1315.8" y1="98" x2="1315.8" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="1121.7" y1="98" x2="1121.7" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="955.4" y1="98" x2="955.4" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="687.7" y1="98" x2="687.7" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="357.8" y1="98" x2="357.8" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<line x1="75.0" y1="98" x2="75.0" y2="748" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="5 5"/>
+<rect x="12" y="384" width="1549.0658000000003" height="338" fill="none" stroke="#64748b" stroke-width="1.2"/>
+<path d="M12,384 h44 v12 l-8,8 h-36 z" fill="#e2e8f0" stroke="#64748b" stroke-width="1.2"/>
+<line x1="12" y1="450" x2="1561.0658000000003" y2="450" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 4"/>
+<line x1="12" y1="516" x2="1561.0658000000003" y2="516" stroke="#64748b" stroke-width="1.2" stroke-dasharray="6 4"/>
+<rect x="950.4" y="204.0" width="10" height="44.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1478.1" y="306.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1310.8" y="272.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1478.1" y="602.0" width="10" height="34.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1310.8" y="568.0" width="10" height="102.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="1116.7" y="238.0" width="10" height="494.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="352.8" y="136.0" width="10" height="602.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="682.7" y="170.0" width="10" height="568.0" fill="#ffffff" stroke="#334155" stroke-width="1.2"/>
+<rect x="30.0" y="52" width="90.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="75.0" y="80.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">Client</text>
+<rect x="299.1" y="52" width="117.5" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="357.8" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«javaScript»</text>
+<text x="357.8" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:server</text>
+<rect x="627.7" y="52" width="120.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="687.7" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«router»</text>
+<text x="687.7" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="895.2" y="52" width="120.3" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="955.4" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«middleware»</text>
+<text x="955.4" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:auth</text>
+<rect x="1061.7" y="52" width="120.0" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1121.7" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«controllers»</text>
+<text x="1121.7" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="1258.8" y="52" width="113.9" height="46" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1315.8" y="72.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«model»</text>
+<text x="1315.8" y="88.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:Reservation</text>
+<path d="M1423.0,59 a60.0,7 0 0,0 120.0,0 v32 a60.0,7 0 0,1 -120.0,0 z" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<ellipse cx="1483.1" cy="59" rx="60.0" ry="7" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
+<text x="1483.1" y="76.0" font-size="12" text-anchor="middle" fill="#1f2933" font-style="italic">«MongoDB»</text>
+<text x="1483.1" y="92.0" font-size="13" text-anchor="middle" fill="#1f2933" font-weight="bold">:reservations</text>
+<rect x="92.0" y="115.0" width="248.8" height="18" fill="#ffffff"/><text x="216.4" y="128.0" font-size="13" text-anchor="middle" fill="#1f2933">req.delete(&#x27;/api/v1/reservations/:id&#x27;)</text>
+<line x1="75.0" y1="136" x2="352.8" y2="136" stroke="#334155" stroke-width="1.4"/>
+<polygon points="342.8,141.0 352.8,136.0 342.8,131.0" fill="#334155"/>
+<rect x="374.8" y="149.0" width="295.9" height="18" fill="#ffffff"/><text x="522.8" y="162.0" font-size="13" text-anchor="middle" fill="#1f2933">app.use(&#x27;/api/v1/reservations&#x27;,reservations)</text>
+<line x1="362.8" y1="170" x2="682.7" y2="170" stroke="#334155" stroke-width="1.4"/>
+<polygon points="672.7,175.0 682.7,170.0 672.7,165.0" fill="#334155"/>
+<rect x="704.7" y="183.0" width="233.6" height="18" fill="#ffffff"/><text x="821.6" y="196.0" font-size="13" text-anchor="middle" fill="#1f2933">protect, authorize(&quot;admin&quot;,&quot;user&quot;)</text>
+<line x1="692.7" y1="204" x2="950.4" y2="204" stroke="#334155" stroke-width="1.4"/>
+<polygon points="940.4,209.0 950.4,204.0 940.4,199.0" fill="#334155"/>
+<rect x="972.4" y="217.0" width="132.4" height="18" fill="#ffffff"/><text x="1038.6" y="230.0" font-size="13" text-anchor="middle" fill="#1f2933">deleteReservation()</text>
+<line x1="960.4" y1="238" x2="1116.7" y2="238" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1106.7,243.0 1116.7,238.0 1106.7,233.0" fill="#334155"/>
+<rect x="1138.7" y="251.0" width="160.1" height="18" fill="#ffffff"/><text x="1218.8" y="264.0" font-size="13" text-anchor="middle" fill="#1f2933">findById(req.params.id)</text>
+<line x1="1126.7" y1="272" x2="1310.8" y2="272" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1300.8,277.0 1310.8,272.0 1300.8,267.0" fill="#334155"/>
+<rect x="1332.8" y="285.0" width="133.3" height="18" fill="#ffffff"/><text x="1399.4" y="298.0" font-size="13" text-anchor="middle" fill="#1f2933">ReservationSchema</text>
+<line x1="1320.8" y1="306" x2="1478.1" y2="306" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1468.1,311.0 1478.1,306.0 1468.1,301.0" fill="#334155"/>
+<rect x="1358.1" y="319.0" width="82.7" height="18" fill="#ffffff"/><text x="1399.4" y="332.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1478.1" y1="340" x2="1320.8" y2="340" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1331.8,334.0 1320.8,340.0 1331.8,346.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="1177.4" y="353.0" width="82.7" height="18" fill="#ffffff"/><text x="1218.8" y="366.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation</text>
+<line x1="1310.8" y1="374" x2="1126.7" y2="374" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1137.7,368.0 1126.7,374.0 1137.7,380.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="65.0" y="391.0" width="70.6" height="17" fill="#ffffff"/><text x="68.0" y="403.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[not found]</text>
+<rect x="480.0" y="415.0" width="236.8" height="18" fill="#ffffff"/><text x="598.4" y="428.0" font-size="13" text-anchor="middle" fill="#1f2933">404 No reservation with the id of ...</text>
+<line x1="1116.7" y1="436" x2="75.0" y2="436" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,431.0 75.0,436.0 85.0,441.0" fill="#334155"/>
+<rect x="19.0" y="457.0" width="159.1" height="17" fill="#ffffff"/><text x="22.0" y="469.0" font-size="12" text-anchor="start" fill="#7c2d12" font-style="italic">[not owner and not admin]</text>
+<rect x="415.8" y="481.0" width="365.1" height="18" fill="#ffffff"/><text x="598.4" y="494.0" font-size="13" text-anchor="middle" fill="#1f2933">401 User ... is not authorized to delete this reservation</text>
+<line x1="1116.7" y1="502" x2="75.0" y2="502" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,497.0 75.0,502.0 85.0,507.0" fill="#334155"/>
+<rect x="1139.7" y="547.0" width="158.1" height="18" fill="#ffffff"/><text x="1218.8" y="560.0" font-size="13" text-anchor="middle" fill="#1f2933">reservation.deleteOne()</text>
+<line x1="1126.7" y1="568" x2="1310.8" y2="568" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1300.8,573.0 1310.8,568.0 1300.8,563.0" fill="#334155"/>
+<rect x="1332.8" y="581.0" width="133.3" height="18" fill="#ffffff"/><text x="1399.4" y="594.0" font-size="13" text-anchor="middle" fill="#1f2933">ReservationSchema</text>
+<line x1="1320.8" y1="602" x2="1478.1" y2="602" stroke="#334155" stroke-width="1.4"/>
+<polygon points="1468.1,607.0 1478.1,602.0 1468.1,597.0" fill="#334155"/>
+<rect x="1376.3" y="615.0" width="46.3" height="18" fill="#ffffff"/><text x="1399.4" y="628.0" font-size="13" text-anchor="middle" fill="#1f2933">result</text>
+<line x1="1478.1" y1="636" x2="1320.8" y2="636" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1331.8,630.0 1320.8,636.0 1331.8,642.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="1195.6" y="649.0" width="46.3" height="18" fill="#ffffff"/><text x="1218.8" y="662.0" font-size="13" text-anchor="middle" fill="#1f2933">result</text>
+<line x1="1310.8" y1="670" x2="1126.7" y2="670" stroke="#334155" stroke-width="1.4" stroke-dasharray="6 4"/>
+<polyline points="1137.7,664.0 1126.7,670.0 1137.7,676.0" fill="none" stroke="#334155" stroke-width="1.5"/>
+<rect x="492.4" y="683.0" width="211.9" height="18" fill="#ffffff"/><text x="598.4" y="696.0" font-size="13" text-anchor="middle" fill="#1f2933">200 {success, data: reservation}</text>
+<line x1="1116.7" y1="704" x2="75.0" y2="704" stroke="#334155" stroke-width="1.4"/>
+<polygon points="85.0,699.0 75.0,704.0 85.0,709.0" fill="#334155"/>
+<text x="18.0" y="399.0" font-size="12" text-anchor="start" fill="#1f2933" font-weight="bold">alt</text>
+</svg>
